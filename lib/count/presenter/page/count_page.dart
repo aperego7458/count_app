@@ -13,41 +13,41 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Counter App"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            BlocBuilder<CounterBloc, int>(
-              builder: (context, count) {
-                return Text(
-                  '$count',
-                  style: Theme.of(context).textTheme.headline4,
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            Row(
+      body: BlocBuilder<CounterBloc, CountState>(
+        builder: (context, state) {
+          return Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FloatingActionButton(
-                  onPressed: () {
-                    counterBloc.add(IncrementEvent());
-                  },
-                  tooltip: 'Increment',
-                  child: const Icon(Icons.add),
+              children: [
+                Text(
+                  '${state.value}',
+                  style: Theme.of(context).textTheme.headline4,
                 ),
-                const SizedBox(width: 16),
-                FloatingActionButton(
-                  onPressed: () {
-                    counterBloc.add(DecrementEvent());
-                  },
-                  tooltip: 'Decrement',
-                  child: const Icon(Icons.remove),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    FloatingActionButton(
+                      onPressed: () {
+                        counterBloc.add(IncrementEvent());
+                      },
+                      tooltip: 'Increment',
+                      child: const Icon(Icons.add),
+                    ),
+                    const SizedBox(width: 16),
+                    FloatingActionButton(
+                      onPressed: () {
+                        counterBloc.add(DecrementEvent());
+                      },
+                      tooltip: 'Decrement',
+                      child: const Icon(Icons.remove),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
